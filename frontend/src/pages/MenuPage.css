@@ -1,0 +1,86 @@
+.menu-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  overflow-y: auto;  /* Habilita el scroll si el contenido excede el tamaño del contenedor */
+}
+
+.segment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;  /* Espaciado inferior para dar espacio entre los segmentos */
+}
+
+.segment:not(:last-child) {
+  border-bottom: 2px solid #ccc;  /* Línea divisoria entre los segmentos, excepto el último */
+}
+
+.image-container {
+  flex: 1;
+  text-align: center;
+}
+
+.logo-image {
+  max-width: 80%;  /* Ajusta el tamaño de la imagen para que sea más pequeña */
+  height: auto;
+  margin: 0 auto;  /* Centra la imagen dentro del contenedor */
+}
+
+
+.action-button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.buttons-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  flex: 1;  /* Hace que los botones ocupen el mismo espacio */
+  max-width: 120px;  /* Limita el ancho máximo de los botones */
+  text-align: center;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+.image-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  width: 100px;
+  height: 120px;
+  text-align: center;
+}
+
+.image-button img {
+  width: 40px; /* Ajusta el tamaño de la imagen */
+  height: 40px;
+  margin-bottom: 5px; /* Espaciado entre la imagen y el texto */
+}
+
+.image-button:hover {
+  background-color: #f0f0f0; /* Efecto hover */
+}
