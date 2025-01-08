@@ -8,6 +8,7 @@ import Calculadora from './pages/calculadora'; // Asegúrate de importar tu comp
 import LocationForm from './pages/LocationForm';
 import ConfirmationPage from './pages/ConfirmationPage';
 // import './styles/App.css';
+import PersonalInformationPage  from './pages/PersonalInformationPage';
 
 const App = () => {
   const [page, setPage] = useState('menu');
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/calculadora" element={<Calculadora />} /> {/* Ruta para la página de la calculadora */}
             <Route path="/geolocalizacion" element={<LocationForm />} />
             <Route path="/confirmacion" element={<ConfirmationPage />} />
+            <Route path="/personal_info" element={<PersonalInformationPage />} />
           </Routes>
         </div>
       </div>
