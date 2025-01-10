@@ -10,7 +10,7 @@ function PersonalInformationPage() {
 
   const [isChecked, setIsChecked] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [termsAccepted, setTermsAccepted] = useState(false); // Define el estado de aceptación de términos
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,21 +19,20 @@ function PersonalInformationPage() {
     });
   };
 
-  const handleCheckboxChange = (e) => {
-    if (!isChecked) {  // Solo permite marcar el checkbox una vez
-      setIsChecked(true);
-      setShowModal(true);  // Muestra el modal cuando el checkbox se marca
+  const handleCheckboxChange = () => {
+    if (!termsAccepted) {
+      setShowModal(true);
+    } else {
+      setIsChecked(!isChecked);
     }
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (cancel = false) => {
+    if (!cancel) {
+      setTermsAccepted(true);
+      setIsChecked(true);
+    }
     setShowModal(false);
-    setIsChecked(false);  // Al cancelar, desmarcar el checkbox
-  };
-
-  const handleAcceptTerms = () => {
-    setTermsAccepted(true); // Marca los términos como aceptados
-    setShowModal(false); // Cierra el modal
   };
 
   const handleSubmit = (e) => {
@@ -96,7 +95,7 @@ function PersonalInformationPage() {
             id="terms" 
             checked={isChecked} 
             onChange={handleCheckboxChange} 
-            disabled={termsAccepted}  // Deshabilita el checkbox si los términos son aceptados
+            disabled={termsAccepted}  
           />
           <label htmlFor="terms" className="form-label ms-2">Acepto los términos y condiciones</label>
         </div>
@@ -113,31 +112,13 @@ function PersonalInformationPage() {
                 <h5 className="modal-title">Términos y Condiciones</h5>
               </div>
               <div className="modal-body">
-                {!termsAccepted ? (
-                  <TerminosCondiciones onAccept={handleAcceptTerms} />
-                ) : (
-                  <div>
-                    <p>Términos Aceptados</p>
-                  </div>
-                )}
+                <TerminosCondiciones 
+                  onAccept={() => handleCloseModal(false)} 
+                  onClose={() => handleCloseModal(true)}  
+                />
               </div>
               <div className="modal-footer">
-                {!termsAccepted && (
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={handleCloseModal} // Cierra el modal sin cambiar el estado del checkbox
-                  >
-                    Cancelar
-                  </button>
-                )}
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={handleAcceptTerms} // Acepta los términos
-                >
-                  Aceptar
-                </button>
+                Si no aceptas no podrás enviar el formulario
               </div>
             </div>
           </div>
