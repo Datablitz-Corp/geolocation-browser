@@ -9,6 +9,7 @@ import LocationForm from './pages/LocationForm';
 import ConfirmationPage from './pages/ConfirmationPage';
 // import './styles/App.css';
 import PersonalInformationPage  from './pages/PersonalInformationPage';
+import FormularioPreguntas  from './pages/FormularioPreguntas';
 
 const App = () => {
   const [page, setPage] = useState('menu');
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/geolocalizacion" element={<LocationForm />} />
             <Route path="/confirmacion" element={<ConfirmationPage />} />
             <Route path="/personal_info" element={<PersonalInformationPage />} />
+            <Route path="/formulario" element={<FormularioPreguntas />} />
           </Routes>
         </div>
       </div>

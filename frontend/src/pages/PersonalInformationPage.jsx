@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
-import TerminosCondiciones from '../components/TerminosCondiciones.jsx'; // Ajusta la ruta si es necesario
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify'; // Importa ToastContainer y toast
+import 'react-toastify/dist/ReactToastify.css'; // Importa los estilos de react-toastify
+import TerminosCondiciones from '../components/TerminosCondiciones.jsx';
 
 function PersonalInformationPage() {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/formulario');
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,8 +53,9 @@ function PersonalInformationPage() {
         email: '',
         phone: '',
       });
+      handleButtonClick();
     } else {
-      console.log('Debe aceptar los términos y condiciones para enviar el formulario.');
+      toast.error('Debe aceptar los términos y condiciones para enviar el formulario.'); // Muestra la advertencia flotante
     }
   };
 
@@ -99,7 +109,7 @@ function PersonalInformationPage() {
           />
           <label htmlFor="terms" className="form-label ms-2">Acepto los términos y condiciones</label>
         </div>
-        <button type="submit" className="btn btn-primary" disabled={!termsAccepted}>
+        <button type="submit" className="btn btn-primary">
           Enviar
         </button>
       </form>
@@ -124,6 +134,8 @@ function PersonalInformationPage() {
           </div>
         </div>
       )}
+
+      <ToastContainer />
     </div>
   );
 }
