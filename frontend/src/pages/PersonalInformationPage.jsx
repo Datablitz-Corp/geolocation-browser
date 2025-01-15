@@ -44,20 +44,39 @@ function PersonalInformationPage() {
     setShowModal(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (termsAccepted) {
-      console.log('Datos enviados:', formData);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-      });
-      handleButtonClick();
+      try {
+        const response = await fetch('http://localhost:8000/personal-info', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Datos enviados:', result);
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+          });
+          toast.success('Datos enviados con éxito');
+          handleButtonClick();
+        } else {
+          toast.error('Error al enviar los datos');
+        }
+      } catch (error) {
+        toast.error('Error al conectar con el servidor');
+      }
     } else {
-      toast.error('Debe aceptar los términos y condiciones para enviar el formulario.'); // Muestra la advertencia flotante
+      toast.error('Debe aceptar los términos y condiciones para enviar el formulario.');
     }
   };
+  
 
   return (
     <div className="container my-5">
