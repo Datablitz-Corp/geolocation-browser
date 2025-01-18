@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const FormularioPreguntas = () => {
+  const location = useLocation();
   const [formData, setFormData] = useState({
-    email: '' 
+    email: location.state?.email || '', // Obtener el correo del estado
   });
 
   const handleChange = (e) => {
@@ -19,7 +21,7 @@ const FormularioPreguntas = () => {
       console.error('El email es requerido');
       return;
     }
-    
+
     try {
       const response = await fetch('http://localhost:8000/questions', {
         method: 'POST',
@@ -40,7 +42,7 @@ const FormularioPreguntas = () => {
     <div className="container mt-4">
       <h1 className="text-center">Formulario de Preguntas</h1>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+      <div className="mb-3">
           <label htmlFor="email" className="form-label">Email</label>
           <input
             type="email"
@@ -49,6 +51,7 @@ const FormularioPreguntas = () => {
             className="form-control"
             value={formData.email}
             onChange={handleChange}
+            readOnly //no editable
             required
           />
         </div>

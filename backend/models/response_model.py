@@ -1,13 +1,13 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import Optional
-from datetime import date
 
 class FormResponse(BaseModel):
-    sol: Optional[str]
-    capitalEspana: Optional[str]
-    lenguaje: Optional[str]
+    email: EmailStr
+    sol: Optional[str] = None
+    capitalEspana: Optional[str] = None
+    lenguaje: Optional[str] = None
     rojo: Optional[bool] = False
     verde: Optional[bool] = False
     azul: Optional[bool] = False
-    horas: Optional[int]
-    comentario: Optional[str]
+    horas: Optional[int] = None
+    comentario: Optional[str] = None

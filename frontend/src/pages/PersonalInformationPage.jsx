@@ -46,7 +46,7 @@ function PersonalInformationPage() {
       toast.error('Debe aceptar los términos y condiciones para enviar el formulario.');
       return;
     }
-
+  
     try {
       const response = await fetch('http://localhost:8000/personal-info', {
         method: 'POST',
@@ -55,13 +55,12 @@ function PersonalInformationPage() {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const result = await response.json();
         console.log('Datos enviados:', result);
-        setFormData({ name: '', email: '', phone: '' });
         toast.success('Datos enviados con éxito');
-        navigate('/formulario');
+        navigate('/formulario', { state: { email: formData.email } }); // Pasar el correo al siguiente formulario
       } else {
         toast.error('Error al enviar los datos');
       }
@@ -69,6 +68,7 @@ function PersonalInformationPage() {
       toast.error('Error al conectar con el servidor');
     }
   };
+  
 
   return (
     <div className="container my-5">
