@@ -10,3 +10,4 @@ client = MongoClient("mongodb://localhost:27017")
 db = client["personalFormDB"]
 personal_info_collection = db["personal_info"]
 collection = db["form_responses"]
+locacion = db["locations"]

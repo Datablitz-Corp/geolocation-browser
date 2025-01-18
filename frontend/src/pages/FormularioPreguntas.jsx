@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 const FormularioPreguntas = () => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    email: '' 
+  });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -13,6 +15,11 @@ const FormularioPreguntas = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.email) {
+      console.error('El email es requerido');
+      return;
+    }
+    
     try {
       const response = await fetch('http://localhost:8000/questions', {
         method: 'POST',
@@ -21,6 +28,7 @@ const FormularioPreguntas = () => {
         },
         body: JSON.stringify(formData),
       });
+
       const data = await response.json();
       console.log('Questions saved:', data);
     } catch (error) {
@@ -28,15 +36,25 @@ const FormularioPreguntas = () => {
     }
   };
 
-  
-
   return (
     <div className="container mt-4">
       <h1 className="text-center">Formulario de Preguntas</h1>
       <form onSubmit={handleSubmit}>
-        {/*SI/ NO*/}
         <div className="mb-3">
-          <label className="form-label">1. Estas bien? </label>
+          <label htmlFor="email" className="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className="form-control"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">1. ¿Estás bien?</label>
           <div>
             <input
               type="radio"
@@ -55,14 +73,13 @@ const FormularioPreguntas = () => {
               value="Falso"
               onChange={handleChange}
             />
-            <label htmlFor="falso" className="ms-2">Si</label>
+            <label htmlFor="falso" className="ms-2">Sí</label>
           </div>
         </div>
 
-        {/* Texto */}
         <div className="mb-3">
           <label htmlFor="capital-espana" className="form-label">
-            2. Dime una oracion.
+            2. Dime una oración.
           </label>
           <input
             type="text"
@@ -73,7 +90,6 @@ const FormularioPreguntas = () => {
           />
         </div>
 
-        {/* Opción Múltiple */}
         <div className="mb-3">
           <label className="form-label">3. ¿Cuál de estos es un lenguaje de programación?</label>
           <select
@@ -88,7 +104,6 @@ const FormularioPreguntas = () => {
           </select>
         </div>
 
-        {/* CheckBox*/}
         <div className="mb-3">
           <label className="form-label">4. Seleccione los colores primarios:</label>
           <div>
@@ -120,7 +135,6 @@ const FormularioPreguntas = () => {
           </div>
         </div>
 
-        {/* Pregunta 5: numerico */}
         <div className="mb-3">
           <label htmlFor="numero-horas" className="form-label">
             5. ¿Cuántas horas tiene un día?
@@ -134,14 +148,6 @@ const FormularioPreguntas = () => {
           />
         </div>
 
-        {/* Pregunta 6: Fecha */}
-       
-
-
-
-      
-
-        {/* Pregunta 7: Comentario */}
         <div className="mb-3">
           <label htmlFor="comentario" className="form-label">
             7. Escribe un comentario sobre este formulario:
@@ -155,7 +161,9 @@ const FormularioPreguntas = () => {
           ></textarea>
         </div>
 
-        <button type="submit" className="btn btn-primary">Enviar</button>
+        <button type="submit" className="btn btn-primary">
+          Enviar
+        </button>
       </form>
     </div>
   );
