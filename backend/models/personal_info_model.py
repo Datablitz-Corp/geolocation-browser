@@ -4,6 +4,3 @@ class PersonalInfo(BaseModel):
     name: str
     email: EmailStr
     phone: str
-
-class PersonalInfoResponse(PersonalInfo):
-    id: str

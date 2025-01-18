@@ -11,11 +11,24 @@ const FormularioPreguntas = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Datos del formulario:", formData);
-    alert("Formulario enviado. Revisa la consola para ver los datos.");
+    try {
+      const response = await fetch('http://localhost:8000/questions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log('Questions saved:', data);
+    } catch (error) {
+      console.error('Error saving questions:', error);
+    }
   };
+
+  
 
   return (
     <div className="container mt-4">
@@ -122,18 +135,7 @@ const FormularioPreguntas = () => {
         </div>
 
         {/* Pregunta 6: Fecha */}
-        <div className="mb-3">
-          <label htmlFor="fecha-nacimiento" className="form-label">
-            6. Ingrese su fecha de nacimiento:
-          </label>
-          <input
-            type="date"
-            id="fecha-nacimiento"
-            name="fechaNacimiento"
-            className="form-control"
-            onChange={handleChange}
-          />
-        </div>
+       
 
 
 

@@ -75,8 +75,8 @@ function PersonalInformationPage() {
     } else {
       toast.error('Debe aceptar los términos y condiciones para enviar el formulario.');
     }
-  };
-  
+};
+
 
   return (
     <div className="container my-5">
